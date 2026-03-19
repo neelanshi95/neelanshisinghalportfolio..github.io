@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Neelanshi Singhal — Digital Marketing & Content Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --slate:       #2C3E50;
+  --slate-mid:   #4A5568;
+  --slate-light: #EDF2F7;
+  --rose:        #C4788A;
+  --rose-light:  #F7EAED;
+  --rose-dark:   #9B5A6A;
+  --rose-pale:   #FDF4F6;
+  --ink:         #1A2332;
+  --muted:       #718096;
+  --border:      #CBD5E0;
+  --cream:       #FAFAF8;
+  --white:       #FFFFFF;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── CUSTOM CURSOR ── */
+.cursor { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; mix-blend-mode: difference; }
+.cursor-dot { width: 8px; height: 8px; background: var(--rose); border-radius: 50%; transform: translate(-50%, -50%); transition: transform 0.1s ease; }
+.cursor-ring { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9998; width: 36px; height: 36px; border: 1.5px solid var(--rose); border-radius: 50%; transform: translate(-50%, -50%); transition: transform 0.18s ease, width 0.2s ease, height 0.2s ease, opacity 0.2s ease; opacity: 0.6; }
+
+/* ── NOISE TEXTURE ── */
+body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.4; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp  { from { opacity: 0; transform: translateY(32px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideIn { from { opacity: 0; transform: translateX(-40px); } to { opacity: 1; transform: translateX(0); } }
+
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── HERO ── */
+.hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; position: relative; overflow: hidden; }
+
+.hero-left { background: var(--slate); padding: 80px 70px 80px 80px; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; animation: fadeIn 1s ease both; }
+.hero-left::before { content: ''; position: absolute; top: -200px; left: -200px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(196,120,138,0.12) 0%, transparent 65%); pointer-events: none; }
+.hero-left::after { content: ''; position: absolute; bottom: -100px; right: -100px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(196,120,138,0.08) 0%, transparent 65%); pointer-events: none; }
+
+.hero-eyebrow { font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 36px; animation: slideIn 0.9s 0.3s ease both; }
+
+.hero-name { font-family: 'Cormorant Garamond', serif; font-size: clamp(3.5rem, 5.5vw, 6.5rem); font-weight: 600; line-height: 1; color: var(--white); margin-bottom: 8px; animation: fadeUp 0.9s 0.4s ease both; }
+.hero-name-italic { font-family: 'Cormorant Garamond', serif; font-size: clamp(3.5rem, 5.5vw, 6.5rem); font-weight: 300; font-style: italic; color: var(--rose); display: block; animation: fadeUp 0.9s 0.55s ease both; }
+
+.hero-rule { width: 60px; height: 2px; background: var(--rose); margin: 36px 0; animation: fadeIn 0.9s 0.7s ease both; }
+
+.hero-tagline { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-style: italic; color: rgba(255,255,255,0.65); margin-bottom: 48px; line-height: 1.6; max-width: 380px; animation: fadeUp 0.9s 0.75s ease both; }
+
+.hero-pills { display: flex; flex-wrap: wrap; gap: 8px; animation: fadeUp 0.9s 0.9s ease both; }
+.pill { border: 1px solid rgba(196,120,138,0.4); color: rgba(255,255,255,0.7); padding: 6px 16px; font-size: 12px; border-radius: 100px; letter-spacing: 0.06em; transition: all 0.25s ease; }
+.pill:hover { background: rgba(196,120,138,0.2); border-color: var(--rose); color: var(--white); }
+
+.hero-right { position: relative; display: flex; flex-direction: column; overflow: hidden; }
+
+.hero-right-top { flex: 1; background: var(--rose-pale); padding: 80px 70px 40px 60px; display: flex; flex-direction: column; justify-content: center; animation: fadeIn 1s 0.3s ease both; position: relative; }
+.hero-right-top::before { content: '"'; font-family: 'Cormorant Garamond', serif; font-size: 20rem; color: var(--rose); opacity: 0.07; position: absolute; top: -40px; left: 20px; line-height: 1; pointer-events: none; }
+
+.about-label { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--rose); margin-bottom: 20px; animation: slideIn 0.9s 0.5s ease both; }
+.about-text { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; line-height: 1.8; color: var(--slate); margin-bottom: 32px; animation: fadeUp 0.9s 0.6s ease both; }
+
+.contact-row { display: flex; flex-direction: column; gap: 10px; animation: fadeUp 0.9s 0.75s ease both; }
+.contact-item { display: flex; align-items: center; gap: 12px; font-size: 13.5px; color: var(--slate-mid); text-decoration: none; transition: color 0.2s ease; }
+.contact-item:hover { color: var(--rose-dark); }
+.contact-icon { width: 30px; height: 30px; background: var(--rose-light); border-radius: 8px; display: grid; place-items: center; font-size: 14px; flex-shrink: 0; transition: background 0.2s ease; }
+.contact-item:hover .contact-icon { background: var(--rose); }
+
+.hero-right-bottom { background: var(--rose); padding: 32px 60px; animation: fadeIn 1s 0.5s ease both; }
+.location-line { font-size: 13px; color: rgba(255,255,255,0.85); letter-spacing: 0.08em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* ── STATS ── */
+.stats-bar { display: flex; flex-wrap: nowrap; border-bottom: 1px solid var(--border); }
+.stat-item { flex: 1; padding: 40px 20px; text-align: center; border-right: 1px solid var(--border); position: relative; overflow: hidden; transition: background 0.3s ease; }
+.stat-item:last-child { border-right: none; }
+.stat-item:hover { background: var(--rose-pale); }
+.stat-item::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%) scaleX(0); width: 40px; height: 2px; background: var(--rose); transition: transform 0.3s ease; }
+.stat-item:hover::after { transform: translateX(-50%) scaleX(1); }
+.stat-num { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 700; color: var(--slate); line-height: 1; margin-bottom: 6px; transition: color 0.3s ease; }
+.stat-item:hover .stat-num { color: var(--rose-dark); }
+.stat-label { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+
+/* ── SECTION ── */
+section { padding: 100px 80px; border-bottom: 1px solid var(--border); }
+.section-eyebrow { display: flex; align-items: center; gap: 16px; margin-bottom: 56px; }
+.section-num { font-family: 'Cormorant Garamond', serif; font-size: 0.85rem; font-style: italic; color: var(--rose); }
+.section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3vw, 3rem); font-weight: 600; letter-spacing: -0.02em; color: var(--slate); }
+.section-line { flex: 1; height: 1px; background: var(--border); }
+
+/* ── FOLDER CARDS ── */
+.folders-grid { display: flex; flex-direction: column; gap: 2px; }
+.folder-card { display: grid; grid-template-columns: 80px 1fr; background: var(--white); border: 1px solid var(--border); overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer; position: relative; }
+.folder-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(44,62,80,0.1); }
+.folder-num-col { background: var(--slate); display: grid; place-items: center; font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 700; color: var(--rose); transition: background 0.3s ease; }
+.folder-card:hover .folder-num-col { background: var(--rose-dark); }
+.folder-body { padding: 36px 44px; display: flex; flex-direction: column; gap: 10px; border-left: 3px solid var(--rose-light); transition: border-color 0.3s ease; }
+.folder-card:hover .folder-body { border-left-color: var(--rose); }
+.folder-card::after { content: '↗'; position: absolute; top: 16px; right: 20px; font-size: 16px; color: var(--border); transition: color 0.3s ease, transform 0.3s ease; }
+.folder-card:hover::after { color: var(--rose); transform: translate(2px, -2px); }
+
+/* ── CLICK PROMPT BUBBLE ── */
+.click-prompt {
+  position: absolute;
+  bottom: 18px;
+  right: 20px;
+  background: var(--slate);
+  color: var(--white);
+  font-size: 11.5px;
+  font-family: 'DM Sans', sans-serif;
+  letter-spacing: 0.06em;
+  padding: 7px 14px;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  opacity: 1;
+  transform: translateY(0);
+  transition: background 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+  white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(44,62,80,0.18);
+  animation: bubblePulse 2.5s ease-in-out infinite;
+}
+.click-prompt::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--rose);
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: dotPulse 2.5s ease-in-out infinite;
+}
+.folder-card:hover .click-prompt {
+  background: var(--rose-dark);
+  transform: translateY(-2px);
+  animation: none;
+}
+
+@keyframes bubblePulse {
+  0%, 100% { box-shadow: 0 4px 16px rgba(44,62,80,0.18); }
+  50% { box-shadow: 0 4px 24px rgba(196,120,138,0.35); }
+}
+@keyframes dotPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.4); }
+}
+.folder-top { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.folder-name { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; color: var(--slate); }
+.badge { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; padding: 4px 10px; border-radius: 100px; font-weight: 500; }
+.badge-india   { background: var(--slate-light); color: var(--slate-mid); }
+.badge-ireland { background: var(--rose-light); color: var(--rose-dark); }
+.badge-both    { background: var(--slate); color: var(--rose); }
+.folder-tagline { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-style: italic; color: var(--rose); }
+.folder-desc { font-size: 14px; color: var(--muted); line-height: 1.75; max-width: 680px; }
+.client-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.client-chip { display: flex; align-items: center; gap: 6px; background: var(--cream); border: 1px solid var(--border); padding: 5px 14px 5px 10px; border-radius: 100px; font-size: 12.5px; color: var(--slate-mid); transition: all 0.2s ease; }
+.client-chip:hover { background: var(--rose-light); border-color: var(--rose); color: var(--rose-dark); transform: translateY(-1px); }
+.client-chip-icon { font-size: 14px; }
+
+/* ── SKILLS ── */
+.skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--border); border: 1px solid var(--border); }
+.skill-card { background: var(--white); padding: 36px 32px; transition: background 0.25s ease; position: relative; overflow: hidden; }
+.skill-card::before { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: var(--rose); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; }
+.skill-card:hover::before { transform: scaleX(1); }
+.skill-card:hover { background: var(--rose-pale); }
+.skill-icon { font-size: 2rem; margin-bottom: 16px; }
+.skill-name { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 600; color: var(--slate); margin-bottom: 8px; }
+.skill-tools { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+/* ── NAV STEPS ── */
+.nav-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--border); border: 1px solid var(--border); }
+.nav-step { background: var(--white); padding: 44px 36px; position: relative; overflow: hidden; transition: background 0.25s ease; }
+.nav-step:nth-child(2) { background: var(--rose-pale); }
+.nav-step:hover { background: var(--slate-light); }
+.nav-step:nth-child(2):hover { background: var(--rose-light); }
+.nav-step-num { font-family: 'Cormorant Garamond', serif; font-size: 4rem; font-weight: 700; color: var(--border); line-height: 1; margin-bottom: 20px; transition: color 0.3s ease; }
+.nav-step:hover .nav-step-num { color: var(--rose); }
+.nav-step:nth-child(2) .nav-step-num { color: var(--rose-light); }
+.nav-step:nth-child(2):hover .nav-step-num { color: var(--rose-dark); }
+.nav-step-title { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600; color: var(--slate); margin-bottom: 12px; }
+.nav-step-desc { font-size: 13.5px; color: var(--muted); line-height: 1.7; }
+
+/* ── CLOSING ── */
+.closing { background: var(--slate); padding: 100px 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.closing-left h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 4vw, 4rem); font-weight: 600; color: var(--white); line-height: 1.1; margin-bottom: 24px; }
+.closing-left h2 em { font-style: italic; color: var(--rose); }
+.closing-left p { font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.8; }
+.closing-right { display: flex; flex-direction: column; gap: 16px; }
+.closing-link { display: flex; align-items: center; gap: 16px; text-decoration: none; color: rgba(255,255,255,0.75); font-size: 14px; padding: 18px 24px; border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; transition: all 0.25s ease; }
+.closing-link:hover { background: rgba(196,120,138,0.15); border-color: var(--rose); color: var(--white); transform: translateX(4px); }
+.closing-link-icon { width: 38px; height: 38px; background: rgba(196,120,138,0.2); border-radius: 8px; display: grid; place-items: center; font-size: 17px; flex-shrink: 0; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-left { padding: 60px 32px; min-height: 60vh; }
+  .hero-right-top { padding: 48px 32px; }
+  .hero-right-bottom { padding: 24px 32px; }
+  section { padding: 60px 28px; }
+  .stats-bar { flex-wrap: nowrap; overflow-x: auto; }
+  .skills-grid { grid-template-columns: 1fr 1fr; }
+  .nav-steps { grid-template-columns: 1fr; }
+  .closing { grid-template-columns: 1fr; padding: 60px 28px; gap: 40px; }
+  .folder-card { grid-template-columns: 60px 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor"><div class="cursor-dot" id="dot"></div></div>
+<div class="cursor-ring" id="ring"></div>
+
+<!-- ── HERO ── -->
+<header class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Digital Marketing &amp; Content Portfolio</p>
+    <h1 class="hero-name">
+      Neelanshi
+      <span class="hero-name-italic">Singhal</span>
+    </h1>
+    <div class="hero-rule"></div>
+    <p class="hero-tagline">Content strategist, digital marketer, and storyteller with five years of building brands that people remember.</p>
+    <div class="hero-pills">
+      <span class="pill">Content Strategy</span>
+      <span class="pill">SEO Writing</span>
+      <span class="pill">Social Media</span>
+      <span class="pill">Paid Ads</span>
+      <span class="pill">Email &amp; CRM</span>
+      <span class="pill">Copywriting</span>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-right-top">
+      <p class="about-label">About This Portfolio</p>
+      <p class="about-text">
+        Five years of content and digital marketing work across India and Ireland — from SEO blogs and brand copy to social campaigns, email flows, push notifications, and paid ad creative. Every piece reflects a belief that great marketing starts with great content: clear, purposeful, built for the audience it serves.
+      </p>
+      <div class="contact-row">
+        <a class="contact-item" href="mailto:neelanshi95@gmail.com">
+          <span class="contact-icon">✉️</span>
+          neelanshi95@gmail.com
+        </a>
+        <a class="contact-item" href="https://linkedin.com/in/neelanshisinghal">
+          <span class="contact-icon">💼</span>
+          linkedin.com/in/neelanshisinghal
+        </a>
+      </div>
+    </div>
+    <div class="hero-right-bottom">
+      <p class="location-line">📍 &nbsp; Based in Ireland &nbsp;·&nbsp; Open to New Opportunities &nbsp;·&nbsp; India &amp; Ireland Experience</p>
+    </div>
+  </div>
+</header>
+
+<!-- ── STATS ── -->
+<div class="stats-bar reveal">
+  <div class="stat-item">
+    <div class="stat-num">5+</div>
+    <div class="stat-label">Years Experience</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">7+</div>
+    <div class="stat-label">Client Brands</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">3</div>
+    <div class="stat-label">Content Verticals</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">2</div>
+    <div class="stat-label">Countries</div>
+  </div>
+</div>
+
+<!-- ── FOLDER GUIDE ── -->
+<section>
+  <div class="section-eyebrow reveal">
+    <span class="section-num">01</span>
+    <h2 class="section-title">What's Inside</h2>
+    <span class="section-line"></span>
+  </div>
+  <div class="folders-grid">
+
+    <a class="folder-card reveal" href="https://drive.google.com/drive/folders/1Up8CngOL3Ee8dJLkr_qANTyvlkZsVcr0?usp=sharing" target="_blank" style="text-decoration:none; color:inherit;">
+      <div class="folder-num-col">01</div>
+      <div class="folder-body">
+        <div class="folder-top">
+          <span class="folder-name">📁 Social Media &amp; Paid Ads</span>
+          <span class="badge badge-both">India + Ireland</span>
+        </div>
+        <p class="folder-tagline">Creative content &amp; paid campaigns across 7+ clients, two countries</p>
+        <p class="folder-desc">The broadest section — organic social content, ad creative, campaign copy and strategy assets. Covers B2B, healthcare, fintech, entertainment, and Hospitality.</p>
+        <div class="client-chips">
+          <span class="client-chip"><span class="client-chip-icon">🏗️</span> Sanghi Cement</span>
+          <span class="client-chip"><span class="client-chip-icon">💊</span> Sandu Pharma</span>
+          <span class="client-chip"><span class="client-chip-icon">🛡️</span> Policy Bazaar</span>
+          <span class="client-chip"><span class="client-chip-icon">🏨</span> Hospitality Clients</span>
+          <span class="client-chip"><span class="client-chip-icon">🎬</span> Disney</span>
+          <span class="client-chip"><span class="client-chip-icon">🍕</span> Pizza Max Ireland 🇮🇪</span>
+          <span class="client-chip"><span class="client-chip-icon">☕</span> Sugar Drop Cafe 🇮🇪</span>
+        </div>
+      </div>
+      <span class="click-prompt">Open Folder</span>
+    </a>
+
+    <a class="folder-card reveal" href="https://drive.google.com/drive/folders/1qFowm8U6KQpJX6iI6SF565-krRC19rqU?usp=sharing" target="_blank" style="text-decoration:none; color:inherit;">
+      <div class="folder-num-col">02</div>
+      <div class="folder-body">
+        <div class="folder-top">
+          <span class="folder-name">📁 Website Content &amp; SEO</span>
+          <span class="badge badge-india">India</span>
+        </div>
+        <p class="folder-tagline">Long-form strategy, SEO articles and UX-informed wireframes</p>
+        <p class="folder-desc">Demonstrates content strategy beyond social — published SEO-optimised blogs across multiple niches, plus website wireframes built to support campaign landing pages. Shows structured, audience-first thinking.</p>
+        <div class="client-chips">
+          <span class="client-chip"><span class="client-chip-icon">📝</span> SEO Blogs</span>
+          <span class="client-chip"><span class="client-chip-icon">🖥️</span> Website Wireframes</span>
+        </div>
+      </div>
+      <span class="click-prompt">Open Folder</span>
+    </a>
+
+    <a class="folder-card reveal" href="https://drive.google.com/drive/folders/1Tce6sB5Pvd_HSjY61ZPV0IDB1ytLbhN9?usp=sharing" target="_blank" style="text-decoration:none; color:inherit;">
+      <div class="folder-num-col">03</div>
+      <div class="folder-body">
+        <div class="folder-top">
+          <span class="folder-name">📁 Retention &amp; CRM</span>
+          <span class="badge badge-india">India</span>
+        </div>
+        <p class="folder-tagline">Email campaigns, drip sequences and push notification copy</p>
+        <p class="folder-desc">A collection of retention-focused content — email designs, automated sequences, and a push notification library. Reflects an understanding of lifecycle marketing, tone consistency, and writing for conversion.</p>
+        <div class="client-chips">
+          <span class="client-chip"><span class="client-chip-icon">✉️</span> Email Marketing</span>
+          <span class="client-chip"><span class="client-chip-icon">🔔</span> Push Notifications</span>
+        </div>
+      </div>
+      <span class="click-prompt">Open Folder</span>
+    </a>
+
+  </div>
+</section>
+
+<!-- ── SKILLS ── -->
+<section style="background: var(--cream);">
+  <div class="section-eyebrow reveal">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Skills &amp; Tools</h2>
+    <span class="section-line"></span>
+  </div>
+  <div class="skills-grid reveal">
+    <div class="skill-card">
+      <div class="skill-icon">✍️</div>
+      <p class="skill-name">Content Strategy</p>
+      <p class="skill-tools">Editorial planning · Pillar content · Tone of voice guidelines · Content calendars</p>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🔍</div>
+      <p class="skill-name">SEO Writing</p>
+      <p class="skill-tools">Keyword research · Long-form blogs · On-page optimisation · Ahrefs · Search Console</p>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">📱</div>
+      <p class="skill-name">Social Media</p>
+      <p class="skill-tools">Instagram · LinkedIn · Facebook · Reels scripting · Community management</p>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">✉️</div>
+      <p class="skill-name">Email &amp; CRM</p>
+      <p class="skill-tools">Campaign copy · Drip sequences · HubSpot · Mailchimp · Push notifications</p>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">📣</div>
+      <p class="skill-name">Paid Ad Creative</p>
+      <p class="skill-tools">Google Ads · Meta Ads · Ad copywriting · Landing page copy · A/B testing</p>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🖥️</div>
+      <p class="skill-name">Web &amp; UX Writing</p>
+      <p class="skill-tools">Website copy · Wireframing · User journey content · CRO-focused writing</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW TO NAVIGATE ── -->
+<section>
+  <div class="section-eyebrow reveal">
+    <span class="section-num">03</span>
+    <h2 class="section-title">How to Navigate</h2>
+    <span class="section-line"></span>
+  </div>
+  <div class="nav-steps reveal">
+    <div class="nav-step">
+      <div class="nav-step-num">01</div>
+      <p class="nav-step-title">Start with Social Media &amp; Paid Ads</p>
+      <p class="nav-step-desc">Open client folders one by one to see campaign breadth — each folder contains social content, ad creative, and copy across industries and formats.</p>
+    </div>
+    <div class="nav-step">
+      <div class="nav-step-num">02</div>
+      <p class="nav-step-title">Move to Website Content &amp; SEO</p>
+      <p class="nav-step-desc">Explore the SEO blogs and wireframes for a sense of long-form content strategy and structured, audience-first thinking.</p>
+    </div>
+    <div class="nav-step">
+      <div class="nav-step-num">03</div>
+      <p class="nav-step-title">Finish with Retention &amp; CRM</p>
+      <p class="nav-step-desc">Browse email campaigns and push notification copy — showing tone consistency, conversion-led writing, and lifecycle thinking.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── CLOSING ── -->
+<div class="closing reveal">
+  <div class="closing-left">
+    <h2>Every piece has a <em>story</em> behind it.</h2>
+    <p>Thank you for taking the time to review my work. I hope this gives you a clear sense of what I bring to the table — I'm excited about the opportunity and would welcome the chance to discuss how my experience aligns with what you're looking for.</p>
+  </div>
+  <div class="closing-right">
+    <a class="closing-link" href="mailto:neelanshi95@gmail.com">
+      <span class="closing-link-icon">✉️</span>
+      neelanshi95@gmail.com
+    </a>
+    <a class="closing-link" href="https://linkedin.com/in/neelanshisinghal">
+      <span class="closing-link-icon">💼</span>
+      linkedin.com/in/neelanshisinghal
+    </a>
+    <a class="closing-link" href="#">
+      <span class="closing-link-icon">📍</span>
+      Ireland
+    </a>
+  </div>
+</div>
+
+<script>
+  // ── Custom cursor
+  const dot  = document.getElementById('dot');
+  const ring = document.getElementById('ring');
+  document.addEventListener('mousemove', e => {
+    dot.parentElement.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+    ring.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+  });
+  document.querySelectorAll('a, .folder-card, .skill-card, .stat-item, .client-chip').forEach(el => {
+    el.addEventListener('mouseenter', () => { ring.style.width = '54px'; ring.style.height = '54px'; ring.style.borderColor = 'var(--rose-dark)'; });
+    el.addEventListener('mouseleave', () => { ring.style.width = '36px'; ring.style.height = '36px'; ring.style.borderColor = 'var(--rose)'; });
+  });
+
+  // ── Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ── Staggered grid reveals
+  const gridObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const children = entry.target.querySelectorAll('.folder-card, .skill-card, .nav-step, .stat-item');
+        children.forEach((child, i) => {
+          setTimeout(() => {
+            child.style.opacity = '1';
+            child.style.transform = 'translateY(0)';
+          }, i * 120);
+        });
+        gridObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.folders-grid, .skills-grid, .nav-steps, .stats-bar').forEach(el => {
+    el.querySelectorAll('.folder-card, .skill-card, .nav-step, .stat-item').forEach(child => {
+      child.style.opacity = '0';
+      child.style.transform = 'translateY(20px)';
+      child.style.transition = 'opacity 0.55s ease, transform 0.55s ease, background 0.25s ease, box-shadow 0.3s ease';
+    });
+    gridObserver.observe(el);
+  });
+
+  // ── Stat counter animation
+  const statNums = document.querySelectorAll('.stat-num');
+  const statObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const original = el.textContent.trim();
+        const suffix = original.includes('+') ? '+' : '';
+        const num = parseInt(original);
+        if (!isNaN(num)) {
+          let start = 0;
+          const steps = 40;
+          const increment = num / steps;
+          const interval = 900 / steps;
+          const timer = setInterval(() => {
+            start += increment;
+            if (start >= num) { el.textContent = num + suffix; clearInterval(timer); }
+            else { el.textContent = Math.floor(start) + suffix; }
+          }, interval);
+        }
+        statObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  statNums.forEach(el => statObserver.observe(el));
+</script>
+</body>
+</html>
